@@ -4,7 +4,8 @@ register = Library()
 import datetime
 import time
 
-from django.utils.tzinfo import LocalTimezone
+# from django.utils.tzinfo import LocalTimezone
+from django.utils.timezone import get_default_timezone
 from django.utils.translation import ungettext, ugettext
 
 def calculate_shorttimesince(d, now=None):
@@ -27,7 +28,7 @@ def calculate_shorttimesince(d, now=None):
     else:
         t = time.localtime()
     if d.tzinfo:
-        tz = LocalTimezone(d)
+        tz = get_default_timezone()
     else:
         tz = None
     now = datetime.datetime(t[0], t[1], t[2], t[3], t[4], t[5], tzinfo=tz)
