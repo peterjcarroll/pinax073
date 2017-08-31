@@ -1,7 +1,7 @@
 from django import template
 from django.utils.encoding import smart_str
 from django.core.urlresolvers import reverse, NoReverseMatch
-from django.db.models import get_model
+from django.apps import apps
 from django.db.models.query import QuerySet
 
 
@@ -58,7 +58,7 @@ class ContentObjectsNode(template.Node):
             model = model_name
         else:
             app_name, model_name = model_name.split(".")
-            model = get_model(app_name, model_name)
+            model = apps.get_model(app_name, model_name)
         
         context[self.context_var] = group.content_objects(model)
         return ""
