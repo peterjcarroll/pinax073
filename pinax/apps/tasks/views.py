@@ -9,7 +9,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.template import RequestContext
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.core.exceptions import ImproperlyConfigured
 from django.db.models import get_app
 from django.db.models import Q

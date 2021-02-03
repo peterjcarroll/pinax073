@@ -2,7 +2,7 @@ import sys
 
 from django.shortcuts import render_to_response
 from django.conf.urls.defaults import patterns, url as urlpattern
-from django.core.urlresolvers import RegexURLPattern, RegexURLResolver, reverse as dreverse
+from django.urls import RegexURLPattern, RegexURLResolver, reverse as dreverse
 
 from django.contrib.contenttypes.models import ContentType
 

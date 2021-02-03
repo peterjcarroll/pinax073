@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
 from django.http import HttpResponseRedirect
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from django.views.generic.simple import direct_to_template
 

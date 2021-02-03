@@ -1,5 +1,5 @@
 from django.http import get_host
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils.html import escape
 import gdata.contacts.service
 

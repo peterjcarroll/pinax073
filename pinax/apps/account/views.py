@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.template import RequestContext
 from django.utils.translation import ugettext, ugettext_lazy as _
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.db import models
 

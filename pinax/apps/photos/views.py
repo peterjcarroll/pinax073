@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, get_host
 from django.template import RequestContext
 from django.db.models import Q
 from django.http import Http404
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User

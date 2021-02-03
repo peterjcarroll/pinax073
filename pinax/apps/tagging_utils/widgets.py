@@ -1,6 +1,6 @@
 from django import forms
 from django.utils.safestring import mark_safe
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.conf import settings
 
 class TagAutoCompleteInput(forms.TextInput):

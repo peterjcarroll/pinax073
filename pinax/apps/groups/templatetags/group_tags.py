@@ -1,6 +1,6 @@
 from django import template
 from django.utils.encoding import smart_str
-from django.core.urlresolvers import reverse, NoReverseMatch
+from django.urls import reverse, NoReverseMatch
 from django.apps import apps
 from django.db.models.query import QuerySet
 
