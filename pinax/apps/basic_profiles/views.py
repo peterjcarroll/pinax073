@@ -2,7 +2,7 @@ from django.urls import reverse
 from django.conf import settings
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect, HttpRequest
 
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import gettext
@@ -62,7 +62,7 @@ def profile_edit(request, form_class=ProfileForm, **kwargs):
     
     template_name = kwargs.get("template_name", "basic_profiles/profile_edit.html")
     
-    if request.is_ajax():
+    if is_ajax(request):
         template_name = kwargs.get(
             "template_name_facebox",
             "basic_profiles/profile_edit_facebox.html"
@@ -84,3 +84,7 @@ def profile_edit(request, form_class=ProfileForm, **kwargs):
         "profile": profile,
         "profile_form": profile_form,
     }, context_instance=RequestContext(request))
+
+
+def is_ajax(request: HttpRequest):
+    return request.headers.get('x-requested-with') == 'XMLHttpRequest'
