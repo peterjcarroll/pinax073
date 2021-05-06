@@ -8,7 +8,7 @@
 {% block body %}
     <h1>{% trans "Editing Offer" %}</h1>
     
-    {% ifequal offer.offerer request.user %}
+    {% if offer.offerer == request.user %}
         <div>
             <form class="uniForm" id="offer_form" method="POST" action="">
                 <fieldset class="inlineLabels">
@@ -22,5 +22,5 @@
         </div>
     {% else %}
         <p>You are not the creator of this offer.</p>
-    {% endifequal %}
+    {% endif %}
 {% endblock %}

@@ -32,7 +32,7 @@
                 {% endfor %}
             </p>
             {% if offer.is_changeable %}
-                {% ifequal offer.offerer request.user %}
+                {% if offer.offerer == request.user %}
                     <form style="display: inline;" action="{% url offer_edit offer.id %}" method="GET">
                         <input type="hidden" name="returnto" value="offer_list_yours" />
                         <input type="submit" value="{% trans "Edit Offer" %}" />
@@ -48,7 +48,7 @@
                             </form>
                         {% endif %}
                     {% endif %}
-                {% endifequal %}
+                {% endif %}
             {% endif %}
         </div>
         

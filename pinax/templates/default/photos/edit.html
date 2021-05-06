@@ -21,7 +21,7 @@
         <img src="{{ photo_url }}" alt="{{ photo.title }}"/>
     </div>
     
-    {% ifequal photo.member request.user %}
+    {% if photo.member == request.user %}
         <form method="POST" action="">
             <table align="center">
                 <tr><td colspan="2">{{ photo_form.non_field_errors }}</td></tr>
@@ -37,6 +37,6 @@
         </form>
     {% else %}
         <p>You are not the author of this photo.</p>
-    {% endifequal %}
+    {% endif %}
     
 {% endblock %}

@@ -14,7 +14,7 @@
     <h1>Tasks</h1>
     
     <p>Group by:
-        {% ifequal group_by "state" %}
+        {% if group_by == "state" %}
             <a href="?group_by=modified">last modified</a>
             or
             <b>state</b>
@@ -25,7 +25,7 @@
             {% autopaginate tasks 10 %}
             {% regroup tasks by get_state_display as grouped_tasks %}
         {% else %}
-            {% ifequal group_by "assignee" %}
+            {% if group_by == "assignee" %}
                 <a href="?group_by=modified">last modified</a>
                 or
                 <a href="?group_by=state">state</a>
@@ -45,20 +45,20 @@
                 {% order tasks by -modified %}
                 {% autopaginate tasks 10 %}
                 {% regroup tasks by modified.date as grouped_tasks %}
-            {% endifequal %}
-        {% endifequal %}
+            {% endif %}
+        {% endif %}
     </p>
     
     {% for section in grouped_tasks %}
-        {% ifequal group_by "state" %}
+        {% if group_by == "state" %}
             <h2 class="join_date">{{ section.grouper }}</h2>
         {% else %}
-            {% ifequal group_by "assignee" %}
+            {% if group_by == "assignee" %}
                 <h2 class="join_date">{{ section.grouper }}</h2>
             {% else %}
                 <h2 class="join_date">{{ section.grouper|naturalday:_("MONTH_DAY_FORMAT")|capfirst }}</h2>
-            {% endifequal %}
-        {% endifequal %}
+            {% endif %}
+        {% endif %}
         
         {% for task in section.list %}
             {% show_task task %}

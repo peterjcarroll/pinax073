@@ -22,9 +22,9 @@
                     </td>
                     <td>
                         <h2><a href="{{ bookmark_instance.bookmark.url }}">{{ bookmark_instance.description }}</a></h2>
-                        {% ifnotequal bookmark_instance.bookmark.adder request.user %}
+                        {% if bookmark_instance.bookmark.adder != request.user %}
                             <div class="save">saved by you on {{ bookmark_instance.saved|date }}.</div>
-                        {% endifnotequal %}
+                        {% endif %}
                         {% if bookmark_instance.note %}
                             <div class="body">{{ bookmark_instance.note|linebreaks }}</div>
                         {% endif %}

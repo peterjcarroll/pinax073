@@ -23,7 +23,7 @@
         <p class="helptext">{% trans "These are bookmarks from your friends:" %}</p>
         
         <p>{% trans "Sort by:" %}
-            {% ifequal sort_order "points" %}
+            {% if sort_order == "points" %}
                 {% anchor "hotness" "reddit-like hotness" %}
                 {% trans "or" %}
                 <b>{% trans "total points" %}</b>
@@ -31,7 +31,7 @@
                 {% anchor "date" "date added" %}
                 {% order_by_votes object_list request.direction %}
             {% else %}
-                {% ifequal sort_order "hotness" %}
+                {% if sort_order == "hotness" %}
                     <b>{% trans "reddit-like hotness" %}</b>
                     {% trans "or" %}
                     {% anchor "points" "total points" %}
@@ -44,8 +44,8 @@
                     {% anchor "points" "total points" %}
                     {% trans "or" %}
                     <b>{% trans "date added" %}</b>
-                {% endifequal %}
-            {% endifequal %}
+                {% endif %}
+            {% endif %}
         </p>
         
         {% autopaginate object_list %}

@@ -24,14 +24,14 @@
         <p>Offering: {{ swap.proposing_offer.offering|urlize }}</p>
         <p>Want: {{ swap.proposing_offer.want|urlize }}</p>
         <div>
-            {% ifequal swap.state "1" %}
-                {% ifequal swap.proposing_offer.offerer request.user %}
+            {% if swap.state == "1" %}
+                {% if swap.proposing_offer.offerer == request.user %}
                     <form action="{% url offer_edit swap.proposing_offer.id %}" method="GET">
                         <input type="hidden" name="returnto" value="proposed_by_you" />
                         <input type="submit" value="{% trans "Edit Offer" %}" />
                     </form>
-                {% endifequal %}
-            {% endifequal %}
+                {% endif %}
+            {% endif %}
         </div>
     </div>
     
@@ -49,14 +49,14 @@
         <p>Offering: {{ swap.responding_offer.offering|urlize }}</p>
         <p>Want: {{ swap.responding_offer.want|urlize }}</p>
         <div>
-            {% ifequal swap.state "1" %}
-                {% ifequal swap.responding_offer.offerer request.user %}
+            {% if swap.state == "1" %}
+                {% if swap.responding_offer.offerer == request.user %}
                     <form action="{% url offer_edit swap.responding_offer.id %}" method="GET">
                         <input type="hidden" name="returnto" value="proposed_to_you" />
                         <input type="submit" value="{% trans "Edit Offer" %}" />
                     </form>
-                {% endifequal %}
-            {% endifequal %}
+                {% endif %}
+            {% endif %}
         </div>
     </div>
     

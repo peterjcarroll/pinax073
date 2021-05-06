@@ -25,9 +25,9 @@
             {% for tag in tags %}
                 <a href="/tags/{{ tag }}">{{ tag }}</a>
             {% endfor %}</p>
-            {% ifequal post.author request.user %}
+            {% if post.author == request.user %}
                 <a href="{% url blog_edit post.id %}">Edit Post</a>
-            {% endifequal %}
+            {% endif %}
         </div>
         
         {% show_blog_post post %}

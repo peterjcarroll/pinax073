@@ -21,16 +21,16 @@
     
     {% if users %}
         <p>{% trans "Order by:" %}
-            {% ifequal order 'date' %}
+            {% if order == 'date' %}
                 <a href="{% url profile_list %}?order=name">{% trans "Name" %} &uarr;</a>
             {% else %}
                 <a href="{% url profile_list %}?order=date">{% trans "Date" %} &darr;</a>
-            {% endifequal %}
+            {% endif %}
         </p>
         
         {% autopaginate users%}
         
-        {% ifequal order 'date'  %}
+        {% if order == 'date'  %}
             {% regroup users by date_joined.date as users_by_date_joined %}
             
             {% for date in users_by_date_joined %}
@@ -44,7 +44,7 @@
             {% for user in users %}
                 {% show_profile user %}
             {% endfor %}
-        {% endifequal %}
+        {% endif %}
         
         {% paginate %}
         

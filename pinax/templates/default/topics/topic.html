@@ -24,7 +24,7 @@
                 <h1>{{ topic.title }}</h1>
                 <div class="body">{{ topic.body|urlize|linebreaks }}</div>
                 <p>{% show_tags_for topic %}</p>
-                {% ifequal user topic.creator %}
+                {% if user == topic.creator %}
                 <form class="uniForm" method="POST" action="{{ request.path }}delete/">
                     <fieldset class="inlineLabels">
                         <div class="form_block">
@@ -34,7 +34,7 @@
                     </fieldset>
                 </form>
                 {% if not edit %}<p><a href="{{ request.path }}edit/">Edit Topic</a></p>{% endif %}
-                {% endifequal %}
+                {% endif %}
             </div>
         </li>
     </ul>

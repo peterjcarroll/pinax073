@@ -44,7 +44,7 @@
         
         <p>{{ group.description }}</p>
         
-        {% ifequal user group.creator %}
+        {% if user == group.creator %}
             <div class="form-toggle">
                 <p><span id="edit-group-toggle">{% trans "Edit details" %}</span></p>
                 
@@ -56,27 +56,27 @@
                 </form>
             </div>
             
-            {% ifequal group.members.all.count 1 %}
+            {% if group.members.all.count == 1 %}
                 <p>{% silk "delete" %} <a href="#" onclick="$('#delete_group_form').toggle(); return false;">{% trans "Delete Group" %}</a><p>
                  <form class="delete_form" id="delete_group_form" action="{% url group_delete group.slug %}" method="POST" style="display: none;">
                      <input type="submit" value="{% trans "Delete Group" %}" /> (all content will be removed)
                 </form>
             {% else %}
                 <p>{% trans "You are not the only member of the group so you cannot delete the group." %}</p>
-            {% endifequal %}
+            {% endif %}
             
-        {% endifequal %}
+        {% endif %}
         
         {% if user.is_authenticated %}
             <div>
                 <form method="POST" action="">
                     {% if is_member %}
-                        {% ifequal user group.creator %}
+                        {% if user == group.creator %}
                             <p>{% trans "You are the creator of this group so can't leave (yet)." %}</p>
                         {% else %}
                             <input type="hidden" name="action" value="leave" />
                             <input type="submit" value="{% trans "leave" %}"/>
-                        {% endifequal %}
+                        {% endif %}
                     {% else %}
                         <input type="hidden" name="action" value="join" />
                         <input type="submit" value="{% trans "join group" %}"/>

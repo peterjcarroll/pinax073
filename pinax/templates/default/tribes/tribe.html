@@ -50,7 +50,7 @@
         
         <p>{{ tribe.description }}</p>
         
-        {% ifequal user tribe.creator %}
+        {% if user == tribe.creator %}
             <div class="form-toggle">
                 <p><span id="edit-tribe-toggle">{% trans "Edit details" %}</span></p>
                 
@@ -65,27 +65,27 @@
                 </form>
             </div>
             
-            {% ifequal tribe.members.all.count 1 %}
+            {% if tribe.members.all.count == 1 %}
                 <p>{% silk "delete" %} <a href="#" onclick="$('#delete_tribe_form').toggle(); return false;">{% trans "Delete tribe" %}</a><p>
                  <form class="delete_form" id="delete_tribe_form" action="{% url tribe_delete tribe.slug %}" method="POST" style="display: none;">
                      <input type="submit" value="{% trans "Delete Tribe" %}" /> (all content will be removed)
                 </form>
             {% else %}
                 <p>{% trans "You are not the only member of the tribe so you can't delete the tribe." %}</p>
-            {% endifequal %}
+            {% endif %}
             
-        {% endifequal %}
+        {% endif %}
         
         {% if user.is_authenticated %}
             <div>
                 <form method="POST" action="">
                     {% if is_member %}
-                        {% ifequal user tribe.creator %}
+                        {% if user == tribe.creator %}
                             <p>{% trans "You are the creator of this tribe so can't leave (yet)." %}</p>
                         {% else %}
                             <input type="hidden" name="action" value="leave" />
                             <input type="submit" value="{% trans "leave" %}"/>
-                        {% endifequal %}
+                        {% endif %}
                     {% else %}
                         <input type="hidden" name="action" value="join" />
                         <input type="submit" value="{% trans "join tribe" %}"/>

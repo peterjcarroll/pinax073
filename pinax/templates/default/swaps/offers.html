@@ -64,11 +64,11 @@
                         <p>Want: {{ offer.want|truncatewords:15 }}</p>
                     </td>
                     <td>
-                        {% ifnotequal user offer.offerer %}
+                        {% if user != offer.offerer %}
                             <form action="{% url propose_swap offer.id %}" method="GET">
                                 <input type="submit" value="{% trans "Propose Swap" %}" />
                             </form>
-                        {% endifnotequal %}
+                        {% endif %}
                     </td>
                     <td class="meta">
                         {% avatar offer.offerer 40 %}

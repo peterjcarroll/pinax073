@@ -34,7 +34,7 @@
     {% endif %}
     
     <p>Group by:
-        {% ifequal group_by "state" %}
+        {% if group_by == "state" %}
             <a href="?{% if gbqs %}{{ gbqs }}&{% endif %}group_by=modified">last modified</a>
             or
             <b>state</b>
@@ -46,7 +46,7 @@
             {% order tasks by state %}
             {% regroup tasks by get_state_display as grouped_tasks %}
         {% else %}
-            {% ifequal group_by "assignee" %}
+            {% if group_by == "assignee" %}
                 <a href="?{% if gbqs %}{{ gbqs }}&{% endif %}group_by=modified">last modified</a>
                 or
                 <a href="?{% if gbqs %}{{ gbqs }}&{% endif %}group_by=state">state</a>
@@ -58,7 +58,7 @@
                 {% order tasks by assignee %}
                 {% regroup tasks by assignee as grouped_tasks %}
             {% else %}
-                {% ifequal group_by "tag" %}
+                {% if group_by == "tag" %}
                     <a href="?{% if gbqs %}{{ gbqs }}&{% endif %}group_by=modified">last modified</a>
                     or
                     <a href="?{% if gbqs %}{{ gbqs }}&{% endif %}group_by=state">state</a>
@@ -78,9 +78,9 @@
                     
                     {% order tasks by -modified %}
                     {% regroup tasks by modified.date as grouped_tasks %}
-                {% endifequal %}
-            {% endifequal %}
-        {% endifequal %}
+                {% endif %}
+            {% endif %}
+        {% endif %}
     </p>
     
     <p class="expand_collapse_all"><a class="expand_all">expand all</a> &ndash; <a class="collapse_all">collapse all</a></p>
@@ -92,7 +92,7 @@
             <th>Assignee</th>
             <th>Status</th>
         </tr>
-        {% ifequal group_by "tag" %}
+        {% if group_by == "tag" %}
             {% tags_for_model tasks.Task as task_tags %}
             {% for section in task_tags %}
                 {% tasks_for_tag section as tagtasks in tasks %}
@@ -131,15 +131,15 @@
                     <td colspan="5">
                         <span class="toggle">
                             <span class="arrow">&#x25BE;</span>
-                            {% ifequal group_by "state" %}
+                            {% if group_by == "state" %}
                             {{ section.grouper }}
                             {% else %}
-                                {% ifequal group_by "assignee" %}
+                                {% if group_by == "assignee" %}
                                     {% if section.grouper %}{{ section.grouper }}{% else %}unassigned{% endif %}
                                 {% else %}
                                     {{ section.grouper|naturalday:_("MONTH_DAY_FORMAT")|capfirst }}
-                                {% endifequal %}
-                            {% endifequal %}
+                                {% endif %}
+                            {% endif %}
                             <span class="count">({{ section.list|length }})</span>
                         </span>
                     </td>
@@ -162,7 +162,7 @@
                     {% endfor %}
                 </tbody>
             {% endfor %}
-        {% endifequal %}
+        {% endif %}
     </table>
     <p class="expand_collapse_all"><a class="expand_all">expand all</a> &ndash; <a class="collapse_all">collapse all</a></p>
     

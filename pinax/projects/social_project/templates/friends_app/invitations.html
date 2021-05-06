@@ -43,7 +43,7 @@
     {% if invites_received %}
         <table class="invitation_list">
             {% for invitation in invites_received %}
-                {% ifequal invitation.status "2" %}
+                {% if invitation.status == "2" %}
                     <tr>
                         <td colspan="3" class="friendship_request">
                             <p>From <a href="{% url profile_detail invitation.from_user.username %}">{{ invitation.from_user }}</a>
@@ -67,7 +67,7 @@
                         <td>{{ invitation.sent }}</td>
                         <td class="invitation_{{ invitation.status }}">{{ invitation.get_status_display }}</td>
                     </tr>
-                {% endifequal %}
+                {% endif %}
             {% endfor %}
         </table>
     {% else %}

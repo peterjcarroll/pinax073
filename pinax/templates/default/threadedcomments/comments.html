@@ -17,12 +17,12 @@
             </div>
             <div class="bulk">
                 <div class="body">{{ response.comment|urlize|linebreaks }}</div>
-                {% ifequal user response.user %}
+                {% if user == response.user %}
                 <form method="POST" action="{% url tc_comment_delete response.id %}">
                     <input type="submit" value="{% trans "Delete Post" %}" />
                     <input type="hidden" name="next" value="{{ request.path }}" />
                 </form>
-                {% endifequal %}
+                {% endif %}
                 <a href="javascript:toggle_comment_form({{ response.id }})">{% trans "Reply to This Post" %}</a>
                 <form class="hidden" method="POST" action="{% get_comment_url object response %}" id="comment_form_{{ response.id }}">
                     <table><tr><td><textarea id="id_comment" rows="10" cols="40" name="comment"></textarea></td></tr>

@@ -20,9 +20,9 @@
     
     <p>{% oembed %}{{ message.body|linebreaksbr }}{% endoembed %}</p>
     
-    {% ifequal message.recipient user %}
+    {% if message.recipient == user %}
         <p><a href="{% url messages_reply message.id %}">{% trans "Reply" %}</a></p>
-    {% endifequal %}
+    {% endif %}
     
     <p><a href="{% url messages_delete message.id %}">{% trans "Delete" %}</a></p>
 {% endblock %}
