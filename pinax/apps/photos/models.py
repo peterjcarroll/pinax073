@@ -8,7 +8,7 @@ from photologue.models import *
 
 from tagging.fields import TagField
 
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 PUBLISH_CHOICES = (
     (1, _('Public')),

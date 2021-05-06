@@ -23,7 +23,7 @@ from django.contrib.contenttypes.models import ContentType
 from pinax.utils.importlib import import_module
 
 from tagging.models import Tag
-from django.utils.translation import ugettext
+from django.utils.translation import gettext
 
 # Only import dpaste Snippet Model if it's activated
 if 'dpaste' in getattr(settings, 'INSTALLED_APPS', []):
@@ -129,7 +129,7 @@ def add_task(request, group_slug=None, secret_id=None, form_class=TaskForm, temp
         paste = get_object_or_404(Snippet, secret_id=secret_id)
         paste.expires = datetime.now() + timedelta(seconds=3600*24*30*12*100) # Update the expiration time to maximum
         paste.save()
-        paste_link = ugettext('Link to the snippet: http://%(domain)s%(link)s\n\n' % {
+        paste_link = gettext('Link to the snippet: http://%(domain)s%(link)s\n\n' % {
                                 'domain': Site.objects.get_current().domain,
                                 'link': reverse('snippet_details', kwargs={'snippet_id': paste.secret_id})
                              })

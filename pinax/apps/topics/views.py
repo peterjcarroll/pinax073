@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.template.loader import select_template
-from django.utils.translation import ugettext_lazy as _ # @@@ really should be ugettext
+from django.utils.translation import gettext_lazy as _ # @@@ really should be gettext
 
 from django.contrib.auth.models import User
 

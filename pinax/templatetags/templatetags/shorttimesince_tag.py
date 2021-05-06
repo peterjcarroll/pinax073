@@ -6,7 +6,7 @@ import time
 
 # from django.utils.tzinfo import LocalTimezone
 from django.utils.timezone import get_default_timezone
-from django.utils.translation import ungettext, ugettext
+from django.utils.translation import ungettext, gettext
 
 def calculate_shorttimesince(d, now=None):
     """
@@ -38,18 +38,18 @@ def calculate_shorttimesince(d, now=None):
     since = delta.days * 24 * 60 * 60 + delta.seconds
     if since <= 0:
         # d is in the future compared to now, stop processing.
-        return u'0' + ugettext('min')
+        return u'0' + gettext('min')
     for i, (seconds, name) in enumerate(chunks):
         count = since // seconds
         if count != 0:
             break
-    s = ugettext('%(number)d%(type)s') % {'number': count, 'type': name(count)}
+    s = gettext('%(number)d%(type)s') % {'number': count, 'type': name(count)}
     if i + 1 < len(chunks):
         # Now get the second item
         seconds2, name2 = chunks[i + 1]
         count2 = (since - (seconds * count)) // seconds2
         if count2 != 0:
-            s += ugettext(', %(number)d%(type)s') % {'number': count2, 'type': name2(count2)}
+            s += gettext(', %(number)d%(type)s') % {'number': count2, 'type': name2(count2)}
     return s
     
 def shorttimesince(value, arg=None):

@@ -4,7 +4,7 @@ from sys import stderr
 from django import forms
 from django.core.exceptions import ImproperlyConfigured
 from django.db.models import get_app
-from django.utils.translation import ugettext
+from django.utils.translation import gettext
 
 from django.contrib.auth.models import User
 
@@ -93,7 +93,7 @@ class EditTaskForm(forms.ModelForm):
         if self.cleaned_data["state"] == u"2":
             if not self.cleaned_data["resolution"]:
                 raise forms.ValidationError(
-                    ugettext("You must provide a resolution to mark this task as resolved")
+                    gettext("You must provide a resolution to mark this task as resolved")
                 )
         return self.cleaned_data["resolution"]
 

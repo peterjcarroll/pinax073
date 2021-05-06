@@ -3,7 +3,7 @@ import re
 from django import forms
 from django.template.loader import render_to_string
 from django.conf import settings
-from django.utils.translation import ugettext_lazy as _, ugettext
+from django.utils.translation import gettext_lazy as _, gettext
 from django.utils.encoding import smart_unicode
 from django.utils.hashcompat import sha_constructor
 
@@ -48,7 +48,7 @@ class LoginForm(forms.Form):
     def login(self, request):
         if self.is_valid():
             login(request, self.user)
-            request.user.message_set.create(message=ugettext(u"Successfully logged in as %(username)s.") % {'username': self.user.username})
+            request.user.message_set.create(message=gettext(u"Successfully logged in as %(username)s.") % {'username': self.user.username})
             if self.cleaned_data['remember']:
                 request.session.set_expiry(60 * 60 * 24 * 7 * 3)
             else:
@@ -114,19 +114,19 @@ class SignupForm(forms.Form):
             if email == join_invitation.contact.email:
                 new_user = User.objects.create_user(username, email, password)
                 join_invitation.accept(new_user) # should go before creation of EmailAddress below
-                new_user.message_set.create(message=ugettext(u"Your email address has already been verified"))
+                new_user.message_set.create(message=gettext(u"Your email address has already been verified"))
                 # already verified so can just create
                 EmailAddress(user=new_user, email=email, verified=True, primary=True).save()
             else:
                 new_user = User.objects.create_user(username, "", password)
                 join_invitation.accept(new_user) # should go before creation of EmailAddress below
                 if email:
-                    new_user.message_set.create(message=ugettext(u"Confirmation email sent to %(email)s") % {'email': email})
+                    new_user.message_set.create(message=gettext(u"Confirmation email sent to %(email)s") % {'email': email})
                     EmailAddress.objects.add_email(new_user, email)
         else:
             new_user = User.objects.create_user(username, "", password)
             if email:
-                new_user.message_set.create(message=ugettext(u"Confirmation email sent to %(email)s") % {'email': email})
+                new_user.message_set.create(message=gettext(u"Confirmation email sent to %(email)s") % {'email': email})
                 EmailAddress.objects.add_email(new_user, email)
         
         if settings.ACCOUNT_EMAIL_VERIFICATION:
@@ -203,7 +203,7 @@ class AddEmailForm(UserForm):
         raise forms.ValidationError(_("This email address already associated with this account."))
     
     def save(self):
-        self.user.message_set.create(message=ugettext(u"Confirmation email sent to %(email)s") % {'email': self.cleaned_data["email"]})
+        self.user.message_set.create(message=gettext(u"Confirmation email sent to %(email)s") % {'email': self.cleaned_data["email"]})
         return EmailAddress.objects.add_email(self.user, self.cleaned_data["email"])
 
 
@@ -227,7 +227,7 @@ class ChangePasswordForm(UserForm):
     def save(self):
         self.user.set_password(self.cleaned_data['password1'])
         self.user.save()
-        self.user.message_set.create(message=ugettext(u"Password successfully changed."))
+        self.user.message_set.create(message=gettext(u"Password successfully changed."))
 
 
 class SetPasswordForm(UserForm):
@@ -244,7 +244,7 @@ class SetPasswordForm(UserForm):
     def save(self):
         self.user.set_password(self.cleaned_data["password1"])
         self.user.save()
-        self.user.message_set.create(message=ugettext(u"Password successfully set."))
+        self.user.message_set.create(message=gettext(u"Password successfully set."))
 
 
 class ResetPasswordForm(forms.Form):
@@ -309,7 +309,7 @@ class ResetPasswordKeyForm(forms.Form):
         user = User.objects.get(passwordreset__exact=password_reset)
         user.set_password(self.cleaned_data["password1"])
         user.save()
-        user.message_set.create(message=ugettext(u"Password successfully changed."))
+        user.message_set.create(message=gettext(u"Password successfully changed."))
         
         # change all the password reset records to this person to be true.
         for password_reset in PasswordReset.objects.filter(user=user):
@@ -328,7 +328,7 @@ class ChangeTimezoneForm(AccountForm):
     def save(self):
         self.account.timezone = self.cleaned_data["timezone"]
         self.account.save()
-        self.user.message_set.create(message=ugettext(u"Timezone successfully updated."))
+        self.user.message_set.create(message=gettext(u"Timezone successfully updated."))
 
 
 class ChangeLanguageForm(AccountForm):
@@ -342,7 +342,7 @@ class ChangeLanguageForm(AccountForm):
     def save(self):
         self.account.language = self.cleaned_data["language"]
         self.account.save()
-        self.user.message_set.create(message=ugettext(u"Language successfully updated."))
+        self.user.message_set.create(message=gettext(u"Language successfully updated."))
 
 
 # @@@ these should somehow be moved out of account or at least out of this module
@@ -364,4 +364,4 @@ class TwitterForm(UserForm):
             twitter_user = self.cleaned_data['username'],
             twitter_password = get_twitter_password(settings.SECRET_KEY, self.cleaned_data['password']),
         )
-        self.user.message_set.create(message=ugettext(u"Successfully authenticated."))
+        self.user.message_set.create(message=gettext(u"Successfully authenticated."))

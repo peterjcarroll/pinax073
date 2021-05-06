@@ -5,7 +5,7 @@ from django.db.models import Q
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.template import RequestContext
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import gettext, gettext_lazy as _
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.db import models
@@ -249,7 +249,7 @@ def other_services(request, template_name="account/other_services.html"):
                     twitter_account)
                 if not twitter_authorized:
                     request.user.message_set.create(
-                        message=ugettext("Twitter authentication failed"))
+                        message=gettext("Twitter authentication failed"))
                 else:
                     twitter_form.save()
     else:
@@ -268,5 +268,5 @@ def other_services_remove(request):
     OtherServiceInfo.objects.filter(user=request.user).filter(
         Q(key="twitter_user") | Q(key="twitter_password")
     ).delete()
-    request.user.message_set.create(message=ugettext("Removed twitter account information successfully."))
+    request.user.message_set.create(message=gettext("Removed twitter account information successfully."))
     return HttpResponseRedirect(reverse("acct_other_services"))

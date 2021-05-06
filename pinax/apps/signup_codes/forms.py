@@ -4,7 +4,7 @@ from django import forms
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.utils.hashcompat import sha_constructor
-from django.utils.translation import ugettext_lazy as _, ugettext
+from django.utils.translation import gettext_lazy as _, gettext
 
 from django.contrib.sites.models import Site
 
@@ -51,7 +51,7 @@ class InviteUserForm(forms.Form):
         current_site = Site.objects.get_current()
         domain = unicode(current_site.domain)
         
-        subject = ugettext("Create an acccount on %(domain)s") % {"domain": domain}
+        subject = gettext("Create an acccount on %(domain)s") % {"domain": domain}
         message = render_to_string("signup_codes/invite_user.txt", {
             "signup_code": signup_code,
             "domain": domain,

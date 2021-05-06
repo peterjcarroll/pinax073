@@ -220,7 +220,7 @@ INTERNAL_IPS = (
     '127.0.0.1',
 )
 
-ugettext = lambda s: s
+gettext = lambda s: s
 LANGUAGES = (
     ('en', u'English'),
 )

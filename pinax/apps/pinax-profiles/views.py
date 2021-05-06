@@ -7,8 +7,8 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
-from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import ugettext
+from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext
 
 from friends.forms import InviteFriendForm
 from friends.models import FriendshipInvitation, Friendship
@@ -80,7 +80,7 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
                 is_friend = False
                 invite_form = InviteFriendForm(request.user, {
                     'to_user': username,
-                    'message': ugettext("Let's be friends!"),
+                    'message': gettext("Let's be friends!"),
                 })
     
     else:
@@ -92,7 +92,7 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
             else:
                 invite_form = InviteFriendForm(request.user, {
                     'to_user': username,
-                    'message': ugettext("Let's be friends!"),
+                    'message': gettext("Let's be friends!"),
                 })
                 invitation_id = request.POST.get("invitation", None)
                 if request.POST.get("action") == "accept": # @@@ perhaps the form should just post to friends and be redirected here
@@ -117,7 +117,7 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
         else:
             invite_form = InviteFriendForm(request.user, {
                 'to_user': username,
-                'message': ugettext("Let's be friends!"),
+                'message': gettext("Let's be friends!"),
             })
     
     previous_invitations_to = FriendshipInvitation.objects.invitations(to_user=other_user, from_user=request.user)

@@ -6,7 +6,7 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User, AnonymousUser
 from django.db.models.signals import post_save
-from django.utils.translation import get_language_from_request, ugettext_lazy as _
+from django.utils.translation import get_language_from_request, gettext_lazy as _
 
 from emailconfirmation.models import EmailAddress, EmailConfirmation
 

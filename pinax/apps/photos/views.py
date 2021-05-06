@@ -5,7 +5,7 @@ from django.db.models import Q
 from django.http import Http404
 from django.urls import reverse
 from django.core.exceptions import ObjectDoesNotExist
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 

@@ -4,7 +4,7 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
-from django.utils.translation import ugettext
+from django.utils.translation import gettext
 
 from django.contrib.admin.views.decorators import staff_member_required
 
@@ -31,7 +31,7 @@ def signup(request, form_class=SignupForm,
             
             auth_login(request, user)
             request.user.message_set.create(
-                message=ugettext("Successfully logged in as %(username)s.") % {
+                message=gettext("Successfully logged in as %(username)s.") % {
                 'username': user.username
             })
             return HttpResponseRedirect(success_url)
@@ -65,11 +65,11 @@ def admin_invite_user(request, form_class=InviteUserForm,
         if form.is_valid():
             email = form.cleaned_data["email"]
             form.send_signup_code()
-            request.user.message_set.create(message=ugettext("An e-mail has been sent to %(email)s.") % {"email": email})
+            request.user.message_set.create(message=gettext("An e-mail has been sent to %(email)s.") % {"email": email})
             form = form_class() # reset
     else:
         form = form_class()
     return render_to_response(template_name, {
-        "title": ugettext("Invite user"),
+        "title": gettext("Invite user"),
         "form": form,
     }, context_instance=RequestContext(request))

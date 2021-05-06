@@ -3,7 +3,7 @@ from django.template import RequestContext
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from friends.models import *
 from friends.forms import JoinRequestForm
