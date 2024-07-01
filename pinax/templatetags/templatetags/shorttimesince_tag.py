@@ -6,19 +6,19 @@ import time
 
 # from django.utils.tzinfo import LocalTimezone
 from django.utils.timezone import get_default_timezone
-from django.utils.translation import ungettext, gettext
+from django.utils.translation import ngettext, gettext
 
 def calculate_shorttimesince(d, now=None):
     """
     like django's built in timesince but abbreviates units
     """
     chunks = (
-      (60 * 60 * 24 * 365, lambda n: ungettext('yr', 'yr', n)),
-      (60 * 60 * 24 * 30, lambda n: ungettext('mn', 'mn', n)),
-      (60 * 60 * 24 * 7, lambda n : ungettext('wk', 'wk', n)),
-      (60 * 60 * 24, lambda n : ungettext('d', 'd', n)),
-      (60 * 60, lambda n: ungettext('hr', 'hr', n)),
-      (60, lambda n: ungettext('min', 'min', n))
+      (60 * 60 * 24 * 365, lambda n: ngettext('yr', 'yr', n)),
+      (60 * 60 * 24 * 30, lambda n: ngettext('mn', 'mn', n)),
+      (60 * 60 * 24 * 7, lambda n : ngettext('wk', 'wk', n)),
+      (60 * 60 * 24, lambda n : ngettext('d', 'd', n)),
+      (60 * 60, lambda n: ngettext('hr', 'hr', n)),
+      (60, lambda n: ngettext('min', 'min', n))
     )
     # Convert datetime.date to datetime.datetime for comparison
     if d.__class__ is not datetime.datetime:
